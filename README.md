@@ -3,7 +3,8 @@
 ## game of catch
 
 **What will the application do?**
-**Who will use it?**
+This application mimics a popular mini game, where users control the basket and tries to catch all the sprites falling 
+from the top of the screen.
 
 ## User Stories
 - As a user, I want to be able to move my basket back and forth
