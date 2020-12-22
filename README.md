@@ -1,6 +1,6 @@
-# Catch Game
+# Basket Catch Game
 
-## game of catch
+## Single player game of catch
 
 **What will the application do?**
 This application mimics a popular mini game, where users control the basket and tries to catch all the sprites falling 
