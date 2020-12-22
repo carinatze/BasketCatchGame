@@ -30,16 +30,15 @@ public class CatchGame {
     // effects:  updates tank, missiles and invaders
     public void update() {
         moveSprites();
-        checkMissiles();
-        invade();
-        checkCollisions();
+        checkThings();
+        fall();
+        checkCaught();
         checkGameOver();
     }
 
     // Responds to key press codes
     // modifies: this
-    // effects:  turns tank, fires missiles and resets game in response to
-    //           given key pressed code
+    // effects:  turns basket and resets game in response to given key pressed code
     public void keyPressed(int keyCode) {
         if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT)
             basket.faceLeft();
@@ -112,7 +111,7 @@ public class CatchGame {
     // Check things
     // modifies: this
     // effects:  removes any thing that has traveled off top of screen
-    private void checkMissiles() {
+    private void checkThings() {
         List<Sprite> thingsToRemove = new ArrayList<Sprite>();
 
         for (Sprite next : sprites) {
@@ -130,7 +129,7 @@ public class CatchGame {
     // Invade!
     // modifies: this
     // effects: randomly generates new thing at top of screen with random x coordinate.
-    private void invade() {
+    private void fall() {
         if (RND.nextInt(250) < 1) {
             Thing t = new Thing(RND.nextInt(WIDTH), 20);
             sprites.add(t);
@@ -141,7 +140,7 @@ public class CatchGame {
     // modifies: this
     // effects:  removes any thing that has been caught with the basket
     //           and removes corresponding thing from play
-    private void checkCollisions() {
+    private void checkCaught() {
         List<Sprite> toBeRemoved = new ArrayList<Sprite>();
         for (Sprite next : sprites) {
             if (next instanceof Thing) {

@@ -36,5 +36,6 @@ public class Thing extends Sprite {
         Rectangle otherBoundingRect = new Rectangle(other.getX() - other.getWidth() / 2, other.getY() - other.getHeight() / 2,
                 other.getWidth(), other.getHeight());
         return thisBoundingRect.intersects(otherBoundingRect);
+        // increment point
     }
 }

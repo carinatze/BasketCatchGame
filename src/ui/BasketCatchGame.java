@@ -14,19 +14,24 @@ public class BasketCatchGame extends JFrame {
         private CatchGame game;
         private GamePanel gp;
         private ScorePanel sp;
+        private JButton eb;
         private Timer t;
 
         // Constructs main window
-        // effects: sets up window in which Space Invaders game will be played
+        // effects: sets up window in which basket catch game will be played
     public BasketCatchGame() {
-            super("Catch Game");
+            super("Basket Catch Game");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setUndecorated(true);
             game = new CatchGame();
             gp = new GamePanel(game);
             sp = new ScorePanel();
+            eb = new JButton("EXIT");
+            eb.setPreferredSize(new Dimension(5,30));
             add(gp);
-            add(sp, BorderLayout.NORTH);
+            add(eb, BorderLayout.PAGE_START);
+            add(sp, BorderLayout.PAGE_END);
+            exitButton();
             addKeyListener(new KeyHandler());
             pack();
             centreOnScreen();
@@ -54,6 +59,16 @@ public class BasketCatchGame extends JFrame {
             });
         }
 
+    private void exitButton() {
+        eb.setBounds(50, 375, 250, 50);
+        eb.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                System.exit(0);
+            }
+        });
+    }
+
         // Centres frame on desktop
         // modifies: this
         // effects:  location of frame is set so frame is centred on desktop
@@ -61,6 +76,7 @@ public class BasketCatchGame extends JFrame {
             Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
             setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
         }
+
 
         /*
          * A key handler to respond to key events

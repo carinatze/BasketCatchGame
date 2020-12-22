@@ -20,7 +20,7 @@ public class ScorePanel extends JPanel {
     //          updates this with the game whose score is to be displayed
     public ScorePanel() {
         //		game = g;
-        setBackground(new Color(80, 10, 180));
+        setBackground(new Color(255, 255, 204));
         thingsLbl = new JLabel(CAUGHT_TXT + 0);
         thingsLbl.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
         livesLbl = new JLabel(LIFE_COUNTER_TXT + CatchGame.MAX_LIVES);
