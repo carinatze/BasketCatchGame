@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 public class CatchGame {
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 600;
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 400;
     public static final Random RND = new Random();
     public static final int MAX_LIVES = 5;
 
@@ -40,14 +40,17 @@ public class CatchGame {
     // modifies: this
     // effects:  turns basket and resets game in response to given key pressed code
     public void keyPressed(int keyCode) {
-        if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT)
+        if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT) {
             basket.faceLeft();
-        else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT)
+//            basket.move();
+        } else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT) {
             basket.faceRight();
-        else if (keyCode == KeyEvent.VK_R && isGameOver)
+//            basket.move();
+        } else if (keyCode == KeyEvent.VK_R && isGameOver) {
             reset();
-        else if (keyCode == KeyEvent.VK_X)
+        } else if (keyCode == KeyEvent.VK_X) {
             System.exit(0);
+        }
     }
 
     public void draw(Graphics g) {
@@ -82,7 +85,9 @@ public class CatchGame {
     // EFFECTS: moves sprites to location at next time
     private void moveSprites() {
         for (Sprite next : sprites) {
-            next.move();
+//            if (next instanceof Basket) {
+                next.move();
+//            }
         }
     }
 
@@ -126,7 +131,7 @@ public class CatchGame {
         sprites.removeAll(thingsToRemove);
     }
 
-    // Invade!
+    // fall!
     // modifies: this
     // effects: randomly generates new thing at top of screen with random x coordinate.
     private void fall() {
@@ -159,7 +164,6 @@ public class CatchGame {
             if (next instanceof Basket) {
                 if (target.collidedWith(next)) {
                     thingsToRemove.add(target);
-                    thingsToRemove.add(next);
                     numThingsInPlay--;
                     numThingsCaught++;
                     // added two lines
@@ -177,9 +181,9 @@ public class CatchGame {
     private void checkGameOver() {
         for (Sprite next : sprites) {
             if (next.getY() > HEIGHT)
-                for (int i = 0; i < MAX_LIVES; i++) {
+//                for (int i = 0; i < MAX_LIVES; i++) {
                     isGameOver = true;
-                }
+//                }
         }
         if (isGameOver)
             initializeSprites();

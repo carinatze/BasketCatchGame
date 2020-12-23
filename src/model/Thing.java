@@ -23,7 +23,7 @@ public class Thing extends Sprite {
 
     @Override
     public void move() {
-        x = x + CatchGame.RND.nextInt(2);
+        x = x + CatchGame.RND.nextInt(10);
         y = y + DOWNWARD_MOVEMENT;
 
         super.move();
