@@ -4,17 +4,22 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Random;
 
-public class CatchGame {
+public class CatchGame extends Observable {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 400;
     public static final Random RND = new Random();
     public static final int MAX_LIVES = 5;
 
+    public static final String THING_CAUGHT = "THING CAUGHT";
+    public static final String LIVES_REMAINING_CHANGED = "LIVES CHANGED";
+
     private List<Sprite> sprites;
     private Basket basket;
     private boolean isGameOver;
+    private int numLivesRemaining;
     private int numThingsInPlay;
     private int numThingsCaught;
 
@@ -66,6 +71,8 @@ public class CatchGame {
 
     public int getNumThingsCaught() { return numThingsCaught; }
 
+    public int getLivesRemaning() { return numLivesRemaining; }
+
     public List<Sprite> getSprites() { return sprites; }
 
     public Basket getBasket() { return basket; }
@@ -89,9 +96,12 @@ public class CatchGame {
         isGameOver = false;
         numThingsInPlay = 0;
         numThingsCaught = 0;
+        numLivesRemaining = MAX_LIVES;
         // notify score panel when a new game starts
-//        setChanged();
-//        notifyObservers();
+        setChanged();
+        notifyObservers(LIVES_REMAINING_CHANGED);
+        setChanged();
+        notifyObservers(THING_CAUGHT);
     }
 
     // Initializes sprites
@@ -112,10 +122,10 @@ public class CatchGame {
         for (Sprite next : sprites) {
             if (next.getY() < 0) {
                 thingsToRemove.add(next);
-                numThingsInPlay--;
-                // added new line to notify score panel when a missile has travelled off screen
-//                setChanged();
-//                notifyObservers();
+                numLivesRemaining--;
+                // added new line to notify score panel when an item has travelled off screen
+                setChanged();
+                notifyObservers(LIVES_REMAINING_CHANGED);
             }
         }
         sprites.removeAll(thingsToRemove);
@@ -157,8 +167,8 @@ public class CatchGame {
                     numThingsInPlay--;
                     numThingsCaught++;
                     // added two lines
-//                    setChanged();
-//                    notifyObservers();
+                    setChanged();
+                    notifyObservers(THING_CAUGHT);
                 }
             }
         }
@@ -173,6 +183,9 @@ public class CatchGame {
         for (Sprite next : sprites) {
                 if (next.getY() > HEIGHT) {
                     counter++;
+                    numLivesRemaining--;
+                    setChanged();
+                    notifyObservers(LIVES_REMAINING_CHANGED);
                     if (counter == 5) {
                     isGameOver = true;
                 }

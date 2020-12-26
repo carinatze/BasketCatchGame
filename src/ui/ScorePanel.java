@@ -4,8 +4,10 @@ import model.CatchGame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ScorePanel extends JPanel {
+public class ScorePanel extends JPanel implements Observer {
     private static final String CAUGHT_TXT = "Items caught: ";
     private static final String LIFE_COUNTER_TXT = "Lives left: ";
     private static final int LBL_WIDTH = 200;
@@ -28,5 +30,18 @@ public class ScorePanel extends JPanel {
         add(thingsLbl);
         add(Box.createHorizontalStrut(10));
         add(livesLbl);
+    }
+
+    // Updates the score panel (using the Observer pattern instead)
+    // MODIFIES: this
+    // EFFECTS:  updates number of things caught and lives left remaining to reflect state of game
+    @Override
+    public void update(Observable o, Object arg) {
+        if (CatchGame.LIVES_REMAINING_CHANGED.equals(arg) || CatchGame.THING_CAUGHT.equals(arg)) {
+            CatchGame catchGame = (CatchGame) o;
+            thingsLbl.setText(CAUGHT_TXT + catchGame.getNumThingsCaught());
+            livesLbl.setText(LIFE_COUNTER_TXT + catchGame.getLivesRemaning());
+            repaint();
+        }
     }
 }
