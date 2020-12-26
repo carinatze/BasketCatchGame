@@ -4,7 +4,7 @@ import java.awt.*;
 
 // Represents a thing coming from the top of the screen
 public class Thing extends Sprite {
-    public static final int DOWNWARD_MOVEMENT = 3;
+    public static final int DOWNWARD_MOVEMENT = 2;
     public static final int SIZE_X = 15;
     public static final int SIZE_Y = 9;
     private static final Color COLOR = new Color(10, 50, 188);

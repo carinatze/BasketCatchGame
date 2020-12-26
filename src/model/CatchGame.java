@@ -125,8 +125,8 @@ public class CatchGame {
     // modifies: this
     // effects: randomly generates new thing at top of screen with random x coordinate.
     private void fall() {
-        if (RND.nextInt(250) < 1) {
-            Thing t = new Thing(RND.nextInt(WIDTH), 20);
+        if (RND.nextInt(240) < 1) {
+            Thing t = new Thing(RND.nextInt(WIDTH), 10);
             sprites.add(t);
         }
     }
@@ -169,11 +169,14 @@ public class CatchGame {
     // effects:  if an 5 things has not been caught, game is marked as
     //           over and lists of caught things are cleared
     private void checkGameOver() {
+        Integer counter = 0;
         for (Sprite next : sprites) {
-            if (next.getY() > HEIGHT)
-                for (int i = 0; i < MAX_LIVES; i++) {
+                if (next.getY() > HEIGHT) {
+                    counter++;
+                    if (counter == 5) {
                     isGameOver = true;
                 }
+            }
         }
         if (isGameOver)
             initializeSprites();

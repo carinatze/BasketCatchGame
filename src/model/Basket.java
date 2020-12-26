@@ -5,7 +5,7 @@ import java.awt.*;
 // Represents a basket
 public class Basket extends Sprite {
 
-    public static final int SPEED = 2;
+    public static final int SPEED = 25;
     private static final int SIZE_X = 30;
     private static final int SIZE_Y = 12;
     private static final int BASKET_Y = CatchGame.HEIGHT - 40;
@@ -35,8 +35,8 @@ public class Basket extends Sprite {
     }
 
     // Faces basket to the left
-    // modifies: this
-    // effects: basket is facing left
+    // MODIFIES: this
+    // EFFECTS: basket is facing left
     public void faceLeft() {
         direction = LEFT;
     }
