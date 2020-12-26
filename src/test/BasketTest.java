@@ -39,31 +39,31 @@ public class BasketTest {
     @Test
     public void testMoveRightOnce() {
         basket.move();
-        assertEquals(XLOC + Basket.DX, basket.getX());
+        assertEquals(XLOC + Basket.SPEED, basket.getX());
     }
 
     @Test
     public void testMoveLeftOnce() {
         basket.faceLeft();
         basket.move();
-        assertEquals(XLOC - Basket.DX, basket.getX());
+        assertEquals(XLOC - Basket.SPEED, basket.getX());
     }
 
     @Test
     public void testMoveRightMany() {
         basket.faceRight();
-        final int NUM_UPDATES = (CatchGame.WIDTH / 4) / Basket.DX;
+        final int NUM_UPDATES = (CatchGame.WIDTH / 4) / Basket.SPEED;
 
         for (int count = 0; count < NUM_UPDATES; count++) {
             basket.move();
         }
 
-        assertEquals(XLOC + NUM_UPDATES * Basket.DX, basket.getX());
+        assertEquals(XLOC + NUM_UPDATES * Basket.SPEED, basket.getX());
     }
 
     @Test
     public void testMoveLeftMany() {
-        final int NUM_UPDATES = (CatchGame.WIDTH / 4) / Basket.DX;
+        final int NUM_UPDATES = (CatchGame.WIDTH / 4) / Basket.SPEED;
 
         basket.faceLeft();
 
@@ -71,7 +71,7 @@ public class BasketTest {
             basket.move();
         }
 
-        assertEquals(XLOC - NUM_UPDATES * Basket.DX, basket.getX());
+        assertEquals(XLOC - NUM_UPDATES * Basket.SPEED, basket.getX());
     }
 
     @Test

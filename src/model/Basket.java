@@ -5,14 +5,13 @@ import java.awt.*;
 // Represents a basket
 public class Basket extends Sprite {
 
-    public static final int DX = 2;
-    private static final int SIZE_X = 20;
+    public static final int SPEED = 2;
+    private static final int SIZE_X = 30;
     private static final int SIZE_Y = 12;
     private static final int BASKET_Y = CatchGame.HEIGHT - 40;
     private static final Color COLOR = new Color(139, 69, 19);
     private static final int LEFT = -1;
     private static final int RIGHT = 1;
-    private static final int SPEED = 20;
 
     private int direction;
 
@@ -58,8 +57,8 @@ public class Basket extends Sprite {
         Color savedCol = g.getColor();
         g.setColor(COLOR);
         g.fillRect(getX() - SIZE_X / 2, getY() - SIZE_Y / 2, SIZE_X, SIZE_Y);
-        Polygon front = frontBasket();
-        g.fillPolygon(front);
+//        Polygon front = frontBasket();
+//        g.fillPolygon(front);
         g.setColor(savedCol);
     }
 

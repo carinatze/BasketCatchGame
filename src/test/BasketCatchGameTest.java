@@ -31,25 +31,12 @@ public class BasketCatchGameTest {
         public void testUpdate() {
             Basket b = catchGame.getBasket();
             assertEquals(catchGame.WIDTH / 2, b.getX());
+            b.move();
             catchGame.update();
-            assertEquals(catchGame.WIDTH / 2 + Basket.DX, b.getX());
+            assertEquals(catchGame.WIDTH / 2 + Basket.SPEED, b.getX());
+            b.move();
             catchGame.update();
-            assertEquals(catchGame.WIDTH / 2 + 2 * Basket.DX, b.getX());
-        }
-
-        @Test
-        public void testNonKeyPadKeyEvent() {
-            Basket b = catchGame.getBasket();
-            catchGame.keyPressed(KeyEvent.VK_LEFT);
-            catchGame.update();
-            assertEquals(catchGame.WIDTH / 2 - Basket.DX, b.getX());
-            catchGame.update();
-            assertEquals(catchGame.WIDTH / 2 - 2 * Basket.DX, b.getX());
-            catchGame.keyPressed(KeyEvent.VK_RIGHT);
-            catchGame.update();
-            assertEquals(catchGame.WIDTH / 2 - Basket.DX, b.getX());
-            catchGame.update();
-            assertEquals(catchGame.WIDTH / 2, b.getX());
+            assertEquals(catchGame.WIDTH / 2 + 2 * Basket.SPEED, b.getX());
         }
 
         @Test
@@ -57,12 +44,14 @@ public class BasketCatchGameTest {
             Basket b = catchGame.getBasket();
             catchGame.keyPressed(KeyEvent.VK_KP_LEFT);
             catchGame.update();
-            assertEquals(catchGame.WIDTH / 2 - Basket.DX, b.getX());
+            assertEquals(catchGame.WIDTH / 2 - Basket.SPEED, b.getX());
+            b.move();
             catchGame.update();
-            assertEquals(catchGame.WIDTH / 2 - 2 * Basket.DX, b.getX());
+            assertEquals(catchGame.WIDTH / 2 - 2 * Basket.SPEED, b.getX());
             catchGame.keyPressed(KeyEvent.VK_KP_RIGHT);
             catchGame.update();
-            assertEquals(catchGame.WIDTH / 2 - Basket.DX, b.getX());
+            assertEquals(catchGame.WIDTH / 2 - Basket.SPEED, b.getX());
+            b.move();
             catchGame.update();
             assertEquals(catchGame.WIDTH / 2, b.getX());
         }

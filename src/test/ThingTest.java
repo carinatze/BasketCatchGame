@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ThingTest {
 
-    private static final int XLOC = CatchGame.WIDTH / 2;
-    private static final int YLOC = 50;
+    private static final int X = CatchGame.WIDTH / 2;
+    private static final int Y = 50;
     private Thing thing;
 
     @BeforeEach
     public void runBefore() {
-        thing = new Thing(XLOC, YLOC);
+        thing = new Thing(X, Y);
     }
 
 
@@ -25,14 +25,14 @@ public class ThingTest {
         final int NUM_UPDATES = 8;
 
         thing.move();
-        assertEquals(XLOC, thing.getX());
-        assertEquals(YLOC + Thing.DOWNWARD_MOVEMENT, thing.getY());
+        assertEquals(X, thing.getX());
+        assertEquals(Y + Thing.DOWNWARD_MOVEMENT, thing.getY());
 
         for(int count = 1; count < NUM_UPDATES; count++) {
             thing.move();
         }
 
-        assertEquals(YLOC + NUM_UPDATES * Thing.DOWNWARD_MOVEMENT, thing.getY());
+        assertEquals(Y + NUM_UPDATES * Thing.DOWNWARD_MOVEMENT, thing.getY());
     }
 
     @Test
@@ -43,22 +43,12 @@ public class ThingTest {
         b = new Basket(thing.getX());
         assertFalse(thing.collidedWith(b));
 
-        b = new Basket(thing.getX() + Thing.SIZE_X / 2);
-        assertFalse(thing.collidedWith(b));
-
-        b = new Basket(thing.getX() + Thing.SIZE_X / 2);
-        assertFalse(thing.collidedWith(b));
-
-        b = new Basket(thing.getX() - Thing.SIZE_X / 2);
+        b = new Basket(thing.getX());
+        final int NUM_UPDATES = (b.getY() - thing.getY())/ thing.DOWNWARD_MOVEMENT;
+        for(int count = 1; count < NUM_UPDATES; count++) {
+            thing.move();
+        }
         assertTrue(thing.collidedWith(b));
 
-        b = new Basket(thing.getX() - Thing.SIZE_X / 2);
-        assertFalse(thing.collidedWith(b));
-
-        b = new Basket(thing.getX());
-        assertTrue(thing.collidedWith(b));
-
-        b = new Basket(thing.getX());
-        assertFalse(thing.collidedWith(b));
     }
 }
