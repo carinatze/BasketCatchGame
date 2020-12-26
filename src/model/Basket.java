@@ -6,17 +6,18 @@ import java.awt.*;
 public class Basket extends Sprite {
 
     public static final int DX = 2;
-    private static final int SIZE_X = 15;
-    private static final int SIZE_Y = 8;
+    private static final int SIZE_X = 20;
+    private static final int SIZE_Y = 12;
     private static final int BASKET_Y = CatchGame.HEIGHT - 40;
     private static final Color COLOR = new Color(139, 69, 19);
     private static final int LEFT = -1;
     private static final int RIGHT = 1;
+    private static final int SPEED = 20;
 
     private int direction;
 
     // Constructs a basket
-    // Effects: basket is located at position (x, BASKET_Y) and not moving
+    // EFFECTS: basket is constructed and located at position (x, BASKET_Y) and not moving
     public Basket(int x) {
         super(x, BASKET_Y, SIZE_X, SIZE_Y);
         direction = RIGHT;
@@ -43,13 +44,12 @@ public class Basket extends Sprite {
 
     @Override
     public void move() {
-//        if (isFacingRight()) {
-//            x += 5;
-//        } else {
-//            x += -5;
-//        }
 
-        x = x + direction * DX;
+        if (isFacingRight()) {
+            x = x + SPEED;
+        } else {
+            x = x - SPEED;
+        }
         super.move();
     }
 

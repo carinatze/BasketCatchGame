@@ -19,15 +19,15 @@ public class CatchGame {
     private int numThingsCaught;
 
     // Constructor
-    // Effects: sets up the game
+    // Effects: sets up the basket catch game
     public CatchGame() {
-        sprites = new ArrayList<>();
+        sprites = new ArrayList<Sprite>();
         initializeSprites();
         reset();
     }
 
     // modifies: this
-    // effects:  updates tank, missiles and invaders
+    // effects:  updates basket and things
     public void update() {
         moveSprites();
         checkThings();
@@ -37,15 +37,15 @@ public class CatchGame {
     }
 
     // Responds to key press codes
-    // modifies: this
-    // effects:  turns basket and resets game in response to given key pressed code
+    // MODIFIES: this
+    // EFFECTS:  turns basket and resets game in response to given key pressed code
     public void keyPressed(int keyCode) {
         if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT) {
             basket.faceLeft();
-//            basket.move();
+            basket.move();
         } else if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT) {
             basket.faceRight();
-//            basket.move();
+            basket.move();
         } else if (keyCode == KeyEvent.VK_R && isGameOver) {
             reset();
         } else if (keyCode == KeyEvent.VK_X) {
@@ -60,34 +60,24 @@ public class CatchGame {
 
     // Is game over?
     // EFFECTS: returns true if game is over, false otherwise
-    public boolean isOver() {
-        return isGameOver;
-    }
+    public boolean isOver() { return isGameOver; }
 
-    public int getNumThingsInPlay() {
-        return numThingsInPlay;
-    }
+    public int getNumThingsInPlay() { return numThingsInPlay; }
 
-    public int getNumThingsCaught() {
-        return numThingsCaught;
-    }
+    public int getNumThingsCaught() { return numThingsCaught; }
 
-    public List<Sprite> getSprites() {
-        return sprites;
-    }
+    public List<Sprite> getSprites() { return sprites; }
 
-    public Basket getBasket() {
-        return basket;
-    }
+    public Basket getBasket() { return basket; }
 
     // moves the sprites
     // MODIFIES: this
     // EFFECTS: moves sprites to location at next time
     private void moveSprites() {
         for (Sprite next : sprites) {
-//            if (next instanceof Basket) {
+            if (next instanceof Thing) {
                 next.move();
-//            }
+            }
         }
     }
 
@@ -114,8 +104,8 @@ public class CatchGame {
     }
 
     // Check things
-    // modifies: this
-    // effects:  removes any thing that has traveled off top of screen
+    // MODIFIES: this
+    // EFFECTS:  removes any thing that has traveled off top of screen
     private void checkThings() {
         List<Sprite> thingsToRemove = new ArrayList<Sprite>();
 
@@ -181,9 +171,9 @@ public class CatchGame {
     private void checkGameOver() {
         for (Sprite next : sprites) {
             if (next.getY() > HEIGHT)
-//                for (int i = 0; i < MAX_LIVES; i++) {
+                for (int i = 0; i < MAX_LIVES; i++) {
                     isGameOver = true;
-//                }
+                }
         }
         if (isGameOver)
             initializeSprites();

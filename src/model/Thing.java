@@ -4,11 +4,13 @@ import java.awt.*;
 
 // Represents a thing coming from the top of the screen
 public class Thing extends Sprite {
-    public static final int DOWNWARD_MOVEMENT = 1;
+    public static final int DOWNWARD_MOVEMENT = 3;
     public static final int SIZE_X = 15;
     public static final int SIZE_Y = 9;
     private static final Color COLOR = new Color(10, 50, 188);
 
+    // Constructor
+    // EFFECTS: thing is constructed at position (x, y)
     public Thing(int x, int y) {
         super(x, y, SIZE_X, SIZE_Y);
     }
@@ -23,7 +25,6 @@ public class Thing extends Sprite {
 
     @Override
     public void move() {
-        x = x + CatchGame.RND.nextInt(10);
         y = y + DOWNWARD_MOVEMENT;
 
         super.move();
@@ -36,6 +37,5 @@ public class Thing extends Sprite {
         Rectangle otherBoundingRect = new Rectangle(other.getX() - other.getWidth() / 2, other.getY() - other.getHeight() / 2,
                 other.getWidth(), other.getHeight());
         return thisBoundingRect.intersects(otherBoundingRect);
-        // increment point
     }
 }

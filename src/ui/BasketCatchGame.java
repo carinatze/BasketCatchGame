@@ -20,24 +20,23 @@ public class BasketCatchGame extends JFrame {
         // Constructs main window
         // effects: sets up window in which basket catch game will be played
     public BasketCatchGame() {
-            super("Basket Catch Game");
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setUndecorated(true);
-            game = new CatchGame();
-            gp = new GamePanel(game);
-            sp = new ScorePanel();
-            eb = new JButton("EXIT");
-            eb.setPreferredSize(new Dimension(5,30));
-            add(gp);
-            add(eb, BorderLayout.PAGE_START);
-            add(sp, BorderLayout.PAGE_END);
-            exitButton();
-            addKeyListener(new KeyHandler());
-            pack();
-            centreOnScreen();
-            setVisible(true);
-            addTimer();
-            t.start();
+        super("Basket Catch Game");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        game = new CatchGame();
+        gp = new GamePanel(game);
+        sp = new ScorePanel();
+        eb = new JButton("EXIT");
+        eb.setPreferredSize(new Dimension(5,30));
+        exitButton();
+        add(gp);
+        add(sp, BorderLayout.NORTH);
+        addKeyListener(new KeyHandler());
+        pack();
+        centreOnScreen();
+        setVisible(true);
+        addTimer();
+        t.start();
 
 //        // added new line to add observer (console writer)
 //        game.addObserver(new ConsoleWriter());

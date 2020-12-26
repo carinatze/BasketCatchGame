@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ScorePanel extends JPanel {
-    private static final String CAUGHT_TXT = "Things caught: ";
+    private static final String CAUGHT_TXT = "Items caught: ";
     private static final String LIFE_COUNTER_TXT = "Lives left: ";
     private static final int LBL_WIDTH = 200;
     private static final int LBL_HEIGHT = 30;

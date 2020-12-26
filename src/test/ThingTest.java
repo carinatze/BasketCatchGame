@@ -25,7 +25,7 @@ public class ThingTest {
         final int NUM_UPDATES = 8;
 
         thing.move();
-        // can't test XLOC due to random jiggle behaviour
+        assertEquals(XLOC, thing.getX());
         assertEquals(YLOC + Thing.DOWNWARD_MOVEMENT, thing.getY());
 
         for(int count = 1; count < NUM_UPDATES; count++) {
@@ -41,10 +41,10 @@ public class ThingTest {
         assertFalse(thing.collidedWith(b));
 
         b = new Basket(thing.getX());
-        assertTrue(thing.collidedWith(b));
+        assertFalse(thing.collidedWith(b));
 
         b = new Basket(thing.getX() + Thing.SIZE_X / 2);
-        assertTrue(thing.collidedWith(b));
+        assertFalse(thing.collidedWith(b));
 
         b = new Basket(thing.getX() + Thing.SIZE_X / 2);
         assertFalse(thing.collidedWith(b));

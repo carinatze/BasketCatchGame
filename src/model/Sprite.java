@@ -13,7 +13,7 @@ public abstract class Sprite {
     protected int height;
 
     //Constructs a sprite
-    //Effects: sprite is at the specified location with given width and height.
+    //EFFECTS: sprite is constructed at the x,y coordinate with width and height
     public Sprite(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
