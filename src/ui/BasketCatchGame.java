@@ -14,7 +14,6 @@ public class BasketCatchGame extends JFrame {
         private CatchGame game;
         private GamePanel gp;
         private ScorePanel sp;
-        private JButton eb;
         private Timer t;
 
         // Constructs main window
@@ -26,9 +25,6 @@ public class BasketCatchGame extends JFrame {
         game = new CatchGame();
         gp = new GamePanel(game);
         sp = new ScorePanel();
-        eb = new JButton("EXIT");
-        eb.setPreferredSize(new Dimension(5,30));
-        exitButton();
         add(gp);
         add(sp, BorderLayout.NORTH);
         addKeyListener(new KeyHandler());
@@ -37,11 +33,8 @@ public class BasketCatchGame extends JFrame {
         setVisible(true);
         addTimer();
         t.start();
-
-//        // added new line to add observer (console writer)
-//        game.addObserver(new ConsoleWriter());
-//        // added new line to add observer (score panel)
-//        game.addObserver(sp);
+        // added new line to add observer (score panel)
+        game.addObserver(sp);
         }
 
         // Set up timer
@@ -58,15 +51,6 @@ public class BasketCatchGame extends JFrame {
             });
         }
 
-    private void exitButton() {
-        eb.setBounds(50, 375, 250, 50);
-        eb.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                System.exit(0);
-            }
-        });
-    }
 
         // Centres frame on desktop
         // modifies: this

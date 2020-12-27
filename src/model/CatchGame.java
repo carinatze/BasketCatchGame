@@ -20,7 +20,6 @@ public class CatchGame extends Observable {
     private Basket basket;
     private boolean isGameOver;
     private int numLivesRemaining;
-    private int numThingsInPlay;
     private int numThingsCaught;
 
     // Constructor
@@ -35,7 +34,7 @@ public class CatchGame extends Observable {
     // EFFECTS:  updates basket and things
     public void update() {
         moveSprites();
-        checkThings();
+//        checkThings();
         fall();
         checkCaught();
         checkGameOver();
@@ -109,22 +108,22 @@ public class CatchGame extends Observable {
         sprites.add(basket);
     }
 
-    // Check things
-    // MODIFIES: this
-    // EFFECTS:  removes any thing that has traveled off top of screen
-    private void checkThings() {
-        List<Sprite> thingsToRemove = new ArrayList<>();
-
-        for (Sprite next : sprites) {
-            if (next.getY() >= CatchGame.HEIGHT) {
-                numLivesRemaining--;
-                setChanged();
-                notifyObservers(LIVES_REMAINING_CHANGED);
-                thingsToRemove.add(next);
-            }
-        }
-        sprites.removeAll(thingsToRemove);
-    }
+//    // Check things
+//    // MODIFIES: this
+//    // EFFECTS:  removes any thing that has traveled off top of screen
+//    private void checkThings() {
+//        List<Sprite> thingsToRemove = new ArrayList<>();
+//
+//        for (Sprite next : sprites) {
+//            if (next.getY() >= HEIGHT) {
+//                numLivesRemaining--;
+//                setChanged();
+//                notifyObservers(LIVES_REMAINING_CHANGED);
+//                thingsToRemove.add(next);
+//            }
+//        }
+//        sprites.removeAll(thingsToRemove);
+//    }
 
     // MODIFIES: this
     // EFFECTS: randomly generates new thing at top of screen with random x coordinate.
@@ -164,23 +163,19 @@ public class CatchGame extends Observable {
         }
     }
 
-    // Is game over? (Has 5 things managed to be missed?)
     // MODIFIES: this
-    // EFFECTS:  if an 5 things has not been caught, game is marked as
-    //           over and lists of caught things are cleared
+    // EFFECTS:  if n things has not been caught, game is over and lists of caught things are cleared
     private void checkGameOver() {
-        Integer counter = 0;
         for (Sprite next : sprites) {
-                if (next.getY() > HEIGHT) {
-                    counter++;
+                if (next.getY() > HEIGHT & numLivesRemaining > 0) {
                     numLivesRemaining--;
                     setChanged();
                     notifyObservers(LIVES_REMAINING_CHANGED);
-                    if (counter == 5) {
+                }
+                if (next.getY() > HEIGHT & numLivesRemaining == 0) {
                     isGameOver = true;
                 }
             }
-        }
         if (isGameOver)
             initializeSprites();
     }
