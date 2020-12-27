@@ -11,7 +11,7 @@ public class CatchGame extends Observable {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 400;
     public static final Random RND = new Random();
-    public static final int MAX_LIVES = 1;
+    public static final int MAX_LIVES = 3;
 
     private List<Sprite> sprites;
     private Basket basket;
