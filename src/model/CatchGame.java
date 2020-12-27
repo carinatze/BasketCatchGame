@@ -26,13 +26,13 @@ public class CatchGame extends Observable {
     // Constructor
     // Effects: sets up the basket catch game
     public CatchGame() {
-        sprites = new ArrayList<Sprite>();
+        sprites = new ArrayList<>();
         initializeSprites();
         reset();
     }
 
     // modifies: this
-    // effects:  updates basket and things
+    // EFFECTS:  updates basket and things
     public void update() {
         moveSprites();
         checkThings();
@@ -53,7 +53,7 @@ public class CatchGame extends Observable {
             basket.move();
         } else if (keyCode == KeyEvent.VK_R && isGameOver) {
             reset();
-        } else if (keyCode == KeyEvent.VK_X) {
+        } else if (keyCode == KeyEvent.VK_ESCAPE) {
             System.exit(0);
         }
     }
@@ -67,11 +67,9 @@ public class CatchGame extends Observable {
     // EFFECTS: returns true if game is over, false otherwise
     public boolean isOver() { return isGameOver; }
 
-    public int getNumThingsInPlay() { return numThingsInPlay; }
-
     public int getNumThingsCaught() { return numThingsCaught; }
 
-    public int getLivesRemaning() { return numLivesRemaining; }
+    public int getLivesRemaining() { return numLivesRemaining; }
 
     public List<Sprite> getSprites() { return sprites; }
 
@@ -94,10 +92,8 @@ public class CatchGame extends Observable {
     //           game is not over
     private void reset() {
         isGameOver = false;
-        numThingsInPlay = 0;
         numThingsCaught = 0;
         numLivesRemaining = MAX_LIVES;
-        // notify score panel when a new game starts
         setChanged();
         notifyObservers(LIVES_REMAINING_CHANGED);
         setChanged();
@@ -117,23 +113,21 @@ public class CatchGame extends Observable {
     // MODIFIES: this
     // EFFECTS:  removes any thing that has traveled off top of screen
     private void checkThings() {
-        List<Sprite> thingsToRemove = new ArrayList<Sprite>();
+        List<Sprite> thingsToRemove = new ArrayList<>();
 
         for (Sprite next : sprites) {
-            if (next.getY() < 0) {
-                thingsToRemove.add(next);
+            if (next.getY() >= CatchGame.HEIGHT) {
                 numLivesRemaining--;
-                // added new line to notify score panel when an item has travelled off screen
                 setChanged();
                 notifyObservers(LIVES_REMAINING_CHANGED);
+                thingsToRemove.add(next);
             }
         }
         sprites.removeAll(thingsToRemove);
     }
 
-    // fall!
-    // modifies: this
-    // effects: randomly generates new thing at top of screen with random x coordinate.
+    // MODIFIES: this
+    // EFFECTS: randomly generates new thing at top of screen with random x coordinate.
     private void fall() {
         if (RND.nextInt(240) < 1) {
             Thing t = new Thing(RND.nextInt(WIDTH), 10);
@@ -142,11 +136,10 @@ public class CatchGame extends Observable {
     }
 
     // Checks for collisions between a thing and the basket
-    // modifies: this
-    // effects:  removes any thing that has been caught with the basket
-    //           and removes corresponding thing from play
+    // MODIFIES: this
+    // EFFECTS:  removes any thing that has been caught with the basket and removes corresponding thing from play
     private void checkCaught() {
-        List<Sprite> toBeRemoved = new ArrayList<Sprite>();
+        List<Sprite> toBeRemoved = new ArrayList<>();
         for (Sprite next : sprites) {
             if (next instanceof Thing) {
                 checkThingCaught((Thing) next, toBeRemoved);
@@ -157,16 +150,13 @@ public class CatchGame extends Observable {
 
     // Has a given thing been caught by the basket?
     // MODIFIES: this, thingsToRemove
-    // EFFECTS: if thing has been caught by a basket, removes thing from play;
-    // increments number of things caught.
+    // EFFECTS: if thing has been caught by a basket, increments number of things caught
     private void checkThingCaught(Thing target, List<Sprite> thingsToRemove) {
         for (Sprite next : sprites) {
             if (next instanceof Basket) {
                 if (target.collidedWith(next)) {
                     thingsToRemove.add(target);
-                    numThingsInPlay--;
                     numThingsCaught++;
-                    // added two lines
                     setChanged();
                     notifyObservers(THING_CAUGHT);
                 }
@@ -175,8 +165,8 @@ public class CatchGame extends Observable {
     }
 
     // Is game over? (Has 5 things managed to be missed?)
-    // modifies: this
-    // effects:  if an 5 things has not been caught, game is marked as
+    // MODIFIES: this
+    // EFFECTS:  if an 5 things has not been caught, game is marked as
     //           over and lists of caught things are cleared
     private void checkGameOver() {
         Integer counter = 0;

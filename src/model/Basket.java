@@ -57,25 +57,6 @@ public class Basket extends Sprite {
         Color savedCol = g.getColor();
         g.setColor(COLOR);
         g.fillRect(getX() - SIZE_X / 2, getY() - SIZE_Y / 2, SIZE_X, SIZE_Y);
-//        Polygon front = frontBasket();
-//        g.fillPolygon(front);
         g.setColor(savedCol);
-    }
-
-    // EFFECTS: returns a polygon that represents front of tank
-    private Polygon frontBasket() {
-        Polygon front = new Polygon();
-
-        if (direction == RIGHT) {
-            front.addPoint(x + SIZE_X / 2, BASKET_Y + SIZE_Y / 2);
-            front.addPoint(x + SIZE_X, BASKET_Y);
-            front.addPoint(x + SIZE_X / 2, BASKET_Y - SIZE_Y / 2);
-        }
-        else {
-            front.addPoint(x - SIZE_X / 2, BASKET_Y + SIZE_Y / 2);
-            front.addPoint(x - SIZE_X, BASKET_Y);
-            front.addPoint(x - SIZE_X / 2, BASKET_Y - SIZE_Y / 2);
-        }
-        return front;
     }
 }
