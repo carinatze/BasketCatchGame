@@ -8,7 +8,7 @@ import java.awt.*;
 // panel where the game is rendered
 public class GamePanel extends JPanel {
     private static final String OVER = "game over";
-    private static final String REPLAY = "Press 'R' to replay";
+    private static final String REPLAY = "Press 'r' to replay";
     private CatchGame game;
 
     // Constructs a game panel

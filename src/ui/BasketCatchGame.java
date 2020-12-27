@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 
 public class BasketCatchGame extends JFrame {
         private static final int INTERVAL = 20;
-        private CatchGame game;
+        private CatchGame catchGame;
         private GamePanel gp;
         private ScorePanel sp;
         private Timer t;
@@ -22,8 +22,8 @@ public class BasketCatchGame extends JFrame {
         super("Basket Catch Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true);
-        game = new CatchGame();
-        gp = new GamePanel(game);
+        catchGame = new CatchGame();
+        gp = new GamePanel(catchGame);
         sp = new ScorePanel();
         add(gp);
         add(sp, BorderLayout.NORTH);
@@ -33,26 +33,23 @@ public class BasketCatchGame extends JFrame {
         setVisible(true);
         addTimer();
         t.start();
-        // added new line to add observer (score panel)
-        game.addObserver(sp);
+        catchGame.addObserver(sp);
         }
 
         // Set up timer
         // modifies: none
-        // effects:  initializes a timer that updates game each
-        //           INTERVAL milliseconds
+        // effects:  initializes a timer that updates game each INTERVAL milliseconds
         private void addTimer() {
             t = new Timer(INTERVAL, new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    game.update();
+                    catchGame.update();
                     gp.repaint();
                 }
             });
         }
 
 
-        // Centres frame on desktop
         // modifies: this
         // effects:  location of frame is set so frame is centred on desktop
         private void centreOnScreen() {
@@ -60,14 +57,11 @@ public class BasketCatchGame extends JFrame {
             setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
         }
 
-
-        /*
-         * A key handler to respond to key events
-         */
+        // key handler
         private class KeyHandler extends KeyAdapter {
             @Override
             public void keyPressed(KeyEvent e) {
-                game.keyPressed(e.getKeyCode());
+                catchGame.keyPressed(e.getKeyCode());
             }
         }
 

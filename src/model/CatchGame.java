@@ -11,11 +11,11 @@ public class CatchGame extends Observable {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 400;
     public static final Random RND = new Random();
-    public static final int MAX_LIVES = 5;
+    public static final int MAX_LIVES = 2;
 
     private List<Sprite> sprites;
     private Basket basket;
-    private boolean isGameOver;
+    public static boolean isGameOver;
     private int numLivesRemaining;
     private int numThingsCaught;
 
@@ -28,7 +28,7 @@ public class CatchGame extends Observable {
     }
 
     // modifies: this
-    // EFFECTS:  updates basket and things
+    // EFFECTS: updates basket and eggs
     public void update() {
         moveSprites();
         fall();
@@ -74,14 +74,14 @@ public class CatchGame extends Observable {
     // EFFECTS: moves sprites to location at next time
     private void moveSprites() {
         for (Sprite next : sprites) {
-            if (next instanceof Thing) {
+            if (next instanceof Egg) {
                 next.move();
             }
         }
     }
 
     // MODIFIES: this
-    // EFFECTS:  resets number of things caught and max lives; game is not over
+    // EFFECTS:  resets number of eggs caught and max lives; game is not over
     private void reset() {
         isGameOver = false;
         numThingsCaught = 0;
@@ -101,7 +101,7 @@ public class CatchGame extends Observable {
 
     // Check things
     // MODIFIES: this
-    // EFFECTS:  removes any thing that has traveled past bottom of screen
+    // EFFECTS:  removes any eggs that has traveled past bottom of screen
     private void checkMissedThings() {
         List<Sprite> thingsToRemove = new ArrayList<>();
 
@@ -124,30 +124,30 @@ public class CatchGame extends Observable {
 
 
     // MODIFIES: this
-    // EFFECTS: randomly generates new thing at top of screen with random x coordinate.
+    // EFFECTS: randomly generates new egg at top of screen with random x coordinate.
     private void fall() {
         if (RND.nextInt(240) < 1) {
-            Thing t = new Thing(RND.nextInt(WIDTH), 10);
+            Egg t = new Egg(RND.nextInt(WIDTH), 10);
             sprites.add(t);
         }
     }
 
     // Checks for collisions between thing and the basket
     // MODIFIES: this
-    // EFFECTS:  removes thing that has been caught by the basket
+    // EFFECTS:  removes egg that has been caught by the basket
     private void checkCaught() {
         List<Sprite> toBeRemoved = new ArrayList<>();
         for (Sprite next : sprites) {
-            if (next instanceof Thing) {
-                checkThingCaught((Thing) next, toBeRemoved);
+            if (next instanceof Egg) {
+                checkThingCaught((Egg) next, toBeRemoved);
             }
         }
         sprites.removeAll(toBeRemoved);
     }
 
     // MODIFIES: this, thingsToRemove
-    // EFFECTS: if thing has been caught by a basket, increments number of things caught
-    private void checkThingCaught(Thing target, List<Sprite> thingsToRemove) {
+    // EFFECTS: if egg has been caught by a basket, increments number of things caught
+    private void checkThingCaught(Egg target, List<Sprite> thingsToRemove) {
         for (Sprite next : sprites) {
             if (next instanceof Basket) {
                 if (target.collidedWith(next)) {
