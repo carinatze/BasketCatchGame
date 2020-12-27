@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 public class BasketCatchGame extends JFrame {
         private static final int INTERVAL = 20;
         private CatchGame catchGame;
+        private TitlePanel tp;
         private GamePanel gp;
         private ScorePanel sp;
         private Timer t;
@@ -23,10 +24,12 @@ public class BasketCatchGame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setUndecorated(true);
         catchGame = new CatchGame();
+        tp = new TitlePanel();
         gp = new GamePanel(catchGame);
         sp = new ScorePanel();
         add(gp);
-        add(sp, BorderLayout.NORTH);
+        add(tp, BorderLayout.NORTH);
+        add(sp, BorderLayout.SOUTH);
         addKeyListener(new KeyHandler());
         pack();
         centreOnScreen();

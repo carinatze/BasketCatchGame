@@ -10,13 +10,14 @@ public class GamePanel extends JPanel {
     private static final String OVER = "game over";
     private static final String REPLAY = "Press 'r' to replay";
     private CatchGame game;
+    private static final Color BACKGROUND_COLOR = new Color(238, 254, 255);
 
     // Constructs a game panel
     // EFFECTS:  sets size and background colour of panel,
     //           updates this with the game to be displayed
     public GamePanel(CatchGame g) {
         setPreferredSize(new Dimension(CatchGame.WIDTH, CatchGame.HEIGHT));
-        setBackground(Color.WHITE);
+        setBackground(BACKGROUND_COLOR);
         this.game = g;
     }
 
