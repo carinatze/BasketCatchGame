@@ -11,7 +11,7 @@ public class CatchGame extends Observable {
     public static final int WIDTH = 600;
     public static final int HEIGHT = 400;
     public static final Random RND = new Random();
-    public static final int MAX_LIVES = 2;
+    public static final int MAX_LIVES = 1;
 
     private List<Sprite> sprites;
     private Basket basket;
@@ -48,7 +48,7 @@ public class CatchGame extends Observable {
             basket.move();
         } else if (keyCode == KeyEvent.VK_R && isGameOver) {
             reset();
-        } else if (keyCode == KeyEvent.VK_ESCAPE) {
+        } else if (keyCode == KeyEvent.VK_ESCAPE || keyCode == KeyEvent.VK_Q) {
             System.exit(0);
         }
     }

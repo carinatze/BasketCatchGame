@@ -7,8 +7,9 @@ import java.awt.*;
 
 // panel where the game is rendered
 public class GamePanel extends JPanel {
-    private static final String OVER = "game over";
-    private static final String REPLAY = "Press 'r' to replay";
+    private static final String OVER = "GAME OVER";
+    private static final String REPLAY = "r to replay";
+    private static final String QUIT = "q to quit";
     private CatchGame game;
     private static final Color BACKGROUND_COLOR = new Color(238, 254, 255);
 
@@ -48,7 +49,8 @@ public class GamePanel extends JPanel {
         g.setFont(new Font("Helvetica", 20, 20));
         FontMetrics fm = g.getFontMetrics();
         centreString(OVER, g, fm, CatchGame.HEIGHT / 2);
-        centreString(REPLAY, g, fm, CatchGame.HEIGHT / 2 + 50);
+        centreString(REPLAY, g, fm, CatchGame.HEIGHT / 2 + 40);
+        centreString(QUIT, g, fm, CatchGame.HEIGHT / 2 + 60);
         g.setColor(saved);
     }
 
