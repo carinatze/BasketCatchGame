@@ -155,6 +155,7 @@ public class CatchGame extends Observable {
                     numThingsCaught++;
                     setChanged();
                     notifyObservers();
+                    Toolkit.getDefaultToolkit().beep();
                 }
             }
         }

@@ -46,11 +46,11 @@ public class GamePanel extends JPanel {
     private void gameOver(Graphics g) {
         Color saved = g.getColor();
         g.setColor(new Color( 0, 0, 0));
-        g.setFont(new Font("Helvetica", 20, 20));
+        g.setFont(new Font("Helvetica", Font.BOLD, 20));
         FontMetrics fm = g.getFontMetrics();
-        centreString(OVER, g, fm, CatchGame.HEIGHT / 2);
-        centreString(REPLAY, g, fm, CatchGame.HEIGHT / 2 + 40);
-        centreString(QUIT, g, fm, CatchGame.HEIGHT / 2 + 60);
+        centreString(OVER, g, fm, CatchGame.HEIGHT / 2 - 20);
+        centreString(REPLAY, g, fm, CatchGame.HEIGHT / 2 + 20);
+        centreString(QUIT, g, fm, CatchGame.HEIGHT / 2 + 40);
         g.setColor(saved);
     }
 

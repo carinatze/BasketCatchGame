@@ -11,7 +11,7 @@ import java.util.Observer;
 public class ScorePanel extends JPanel implements Observer {
     private static final String CAUGHT_TXT = "Eggs caught: ";
     private static final String LIFE_COUNTER_TXT = "Lives left: ";
-    private static final int LBL_WIDTH = 200;
+    private static final int LBL_WIDTH = 170;
     private static final int LBL_HEIGHT = 30;
 
     //	private CatchGame game;
@@ -21,10 +21,13 @@ public class ScorePanel extends JPanel implements Observer {
     // Constructs a score panel
     // effects: sets the background colour and draws initial labels; updates this with score
     public ScorePanel() {
-        setBackground(new Color(255, 255, 204));
+        setBackground(new Color(211, 250, 231));
+        Font font = new Font("Helvetica", Font.BOLD, 14);
         eggsCaughtLbl = new JLabel(CAUGHT_TXT + 0);
+        eggsCaughtLbl.setFont(font);
         eggsCaughtLbl.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
         livesLbl = new JLabel(LIFE_COUNTER_TXT + CatchGame.MAX_LIVES);
+        livesLbl.setFont(font);
         livesLbl.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
         add(eggsCaughtLbl);
         add(Box.createHorizontalStrut(10));
