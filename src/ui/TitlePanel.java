@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TitlePanel extends JPanel {
-    private static final int LBL_WIDTH = 226;
+    private static final int LBL_WIDTH = 224;
     private static final int LBL_HEIGHT = 25;
     private JLabel titleLbl;
 
