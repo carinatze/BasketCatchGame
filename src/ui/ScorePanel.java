@@ -37,11 +37,9 @@ public class ScorePanel extends JPanel implements Observer {
     // EFFECTS:  updates number of things caught and lives left remaining to reflect state of game
     @Override
     public void update(Observable o, Object arg) {
-        if (CatchGame.LIVES_REMAINING_CHANGED.equals(arg) || CatchGame.THING_CAUGHT.equals(arg)) {
             CatchGame catchGame = (CatchGame) o;
             thingsLbl.setText(CAUGHT_TXT + catchGame.getNumThingsCaught());
             livesLbl.setText(LIFE_COUNTER_TXT + catchGame.getLivesRemaining());
             repaint();
-        }
     }
 }
