@@ -34,10 +34,9 @@ public class CatchGame extends Observable {
     // EFFECTS:  updates basket and things
     public void update() {
         moveSprites();
-//        checkThings();
         fall();
         checkCaught();
-        checkGameOver();
+        checkMissedThings();
     }
 
     // Responds to key press codes
@@ -108,22 +107,29 @@ public class CatchGame extends Observable {
         sprites.add(basket);
     }
 
-//    // Check things
-//    // MODIFIES: this
-//    // EFFECTS:  removes any thing that has traveled off top of screen
-//    private void checkThings() {
-//        List<Sprite> thingsToRemove = new ArrayList<>();
-//
-//        for (Sprite next : sprites) {
-//            if (next.getY() >= HEIGHT) {
-//                numLivesRemaining--;
-//                setChanged();
-//                notifyObservers(LIVES_REMAINING_CHANGED);
-//                thingsToRemove.add(next);
-//            }
-//        }
-//        sprites.removeAll(thingsToRemove);
-//    }
+    // Check things
+    // MODIFIES: this
+    // EFFECTS:  removes any thing that has traveled past bottom of screen
+    private void checkMissedThings() {
+        List<Sprite> thingsToRemove = new ArrayList<>();
+
+        for (Sprite next : sprites) {
+            if (next.getY() > HEIGHT) {
+                thingsToRemove.add(next);
+                numLivesRemaining--;
+                setChanged();
+                notifyObservers(LIVES_REMAINING_CHANGED);
+                if (numLivesRemaining == 0) {
+                    isGameOver = true;
+                }
+            }
+        }
+        sprites.removeAll(thingsToRemove);
+        if (isGameOver) {
+            initializeSprites();
+        }
+    }
+
 
     // MODIFIES: this
     // EFFECTS: randomly generates new thing at top of screen with random x coordinate.
@@ -161,22 +167,5 @@ public class CatchGame extends Observable {
                 }
             }
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS:  if n things has not been caught, game is over and lists of caught things are cleared
-    private void checkGameOver() {
-        for (Sprite next : sprites) {
-                if (next.getY() > HEIGHT & numLivesRemaining > 0) {
-                    numLivesRemaining--;
-                    setChanged();
-                    notifyObservers(LIVES_REMAINING_CHANGED);
-                }
-                if (next.getY() > HEIGHT & numLivesRemaining == 0) {
-                    isGameOver = true;
-                }
-            }
-        if (isGameOver)
-            initializeSprites();
     }
 }
